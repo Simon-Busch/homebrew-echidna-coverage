@@ -6,14 +6,14 @@ class EchidnaCoverage < Formula
   license "MIT"
 
   depends_on "node@18"
-  depends_on "yarn"
+  depends_on "npm"
 
   def install
     # Install dependencies
-    system "yarn", "install"
+    system "npm", "install"
 
     # Build the project
-    system "yarn", "run", "build"
+    system "npm", "run", "build"
 
     # Install all files to libexec
     libexec.install Dir["*"]
