@@ -8,13 +8,13 @@ class EchidnaCoverage < Formula
   depends_on "node@18"
 
   def install
-    system "npm", "install", "--production"
-    system "npm", "run", "build"
+    system "yarn", "install", "--production"
+    system "yarn", "run", "build"
     libexec.install Dir["*"]
-    bin.install_symlink libexec/"dist/bin.js" => "echidna-coverage"
+    bin.install_symlink libexec/"dist/index.js" => "echidna-coverage"
   end
 
   test do
-    system bin/"echidna-coverage", "--help"
+    system bin, "--help"
   end
 end
