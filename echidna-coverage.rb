@@ -5,14 +5,16 @@ class EchidnaCoverage < Formula
   sha256 "316cbb5dc8e1342e601cc7aa27bef53abcb966e455e75354a14ba2eb6eb4a68c"
   license "MIT"
 
-  depends_on "node"
+  depends_on "node@18"
 
   def install
-    system "npm", "install", *Language::Node.std_npm_install_args(libexec)
-    bin.install_symlink Dir["#{libexec}/bin/*"]
+    system "npm", "install", "--production"
+    system "npm", "run", "build"
+    libexec.install Dir["*"]
+    bin.install_symlink libexec/"dist/bin.js" => "echidna-coverage"
   end
 
   test do
-    system "#{bin}/echidna-coverage", "--help"
+    system bin/"echidna-coverage", "--help"
   end
 end
