@@ -10,7 +10,7 @@ class EchidnaCoverage < Formula
 
   def install
     # Install dependencies
-    system "yarn", "install", "--production"
+    system "yarn", "install"
 
     # Build the project
     system "yarn", "run", "build"
