@@ -12,9 +12,12 @@ class EchidnaCoverage < Formula
     system "yarn", "run", "build"
     libexec.install Dir["*"]
     bin.install_symlink libexec/"dist/index.js" => "echidna-coverage"
+
+    # Add executable permissions to the entry point
+    chmod 0755, libexec/"dist/index.js"
   end
 
   test do
-    system bin, "--help"
+    assert_match "echidna-coverage", shell_output("#{bin}/echidna-coverage --help")
   end
 end
