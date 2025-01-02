@@ -6,18 +6,30 @@ class EchidnaCoverage < Formula
   license "MIT"
 
   depends_on "node@18"
+  depends_on "yarn"
 
   def install
+    # Install dependencies
     system "yarn", "install", "--production"
-    system "yarn", "run", "build"
-    libexec.install Dir["*"]
-    bin.install_symlink libexec/"dist/index.js" => "echidna-coverage"
 
-    # Add executable permissions to the entry point
-    chmod 0755, libexec/"dist/index.js"
+    # Build the project
+    system "yarn", "run", "build"
+
+    # Install all files to libexec
+    libexec.install Dir["*"]
+
+    # Create wrapper script
+    (bin/"echidna-coverage").write <<~EOS
+      #!/bin/bash
+      exec "#{Formula["node@18"].opt_bin}/node" "#{libexec}/dist/index.js" "$@"
+    EOS
   end
 
   test do
+    # Test help command
     assert_match "echidna-coverage", shell_output("#{bin}/echidna-coverage --help")
+
+    # Test version command
+    assert_match version.to_s, shell_output("#{bin}/echidna-coverage --version")
   end
 end
