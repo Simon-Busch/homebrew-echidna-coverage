@@ -1,8 +1,8 @@
 class EchidnaCoverage < Formula
   desc "Coverage report generator for Echidna"
   homepage "https://github.com/Simon-Busch/echidna-coverage"
-  url "https://github.com/Simon-Busch/echidna-coverage/archive/refs/tags/v1.0.6.tar.gz"
-  sha256 "9806d95ef14411d38fa5432a1f7b179a2e25684012bfb1a3cc59cad24a183519"
+  url "https://github.com/Simon-Busch/echidna-coverage/archive/refs/tags/v1.0.7.tar.gz"
+  sha256 "9b876cab306b90a2679c96ca4d77b29d9a5e52e65d0a42d4d43e2493705be859"
   license "MIT"
 
   depends_on "node@18"
